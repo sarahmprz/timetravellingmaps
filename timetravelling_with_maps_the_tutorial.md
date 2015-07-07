@@ -59,7 +59,7 @@ I’ve picked some geographical info from the excellent book, [Vancouver Confide
 * The Shõwa Club, hangout for the Black Dragon Society
 * The City Dump/Hobo Jungle, home to 450 of the city’s homeless, in 1931
 
-[Download the CSV list](https://github.com/sarahmprz/timetravellingmaps/blob/master/vanconfidential.csv)
+[Download the CSV list](https://raw.githubusercontent.com/sarahmprz/timetravellingmaps/master/vanconfidential.csv)
 
 You can create your own list from other data you find more interesting or useful. It can be people, events, buildings, businesses, whatevs. Good data in = good map out.
 
@@ -234,34 +234,6 @@ We have not connected showPopup to anything. Modify your current L.geoJson line 
 <script src="https://gist.github.com/sarahmprz/02609cb88bc7d723d441.js"></script>
 
 …you are just adding , {onEachFeature: showPopup} after geodata. This tells Leaflet to apply the showPopup function for each feature in the GeoJSON.
-
---------INSERT PIC
-
-Sure, this is nice, but wouldn’t it be better to actually see the photo? Let’s do just that! Replace the showPopup function with this one:
-
-function showPopup(feature, layer) {
-  var key, val;
-  var content = [];
-  for (key in feature.properties) {
-    val = feature.properties[key];
-    if (key == "Page") {
-      val = '<a href="http://www.bibliotecanacional.gov.co/recursos_user/bookreader/1889_sala3a_12756/#page/' + val + '" target="_blank">See page</a>';
-    } else if (key == "Photo") {
-      val = '<img src="' + val + '"  height="150" />';
-    }
-    content.push("<strong>" + key + ":</strong> " + val);
-  }
-  layer.bindPopup(content.join("<br />"));
-}
-
-
-We just added a check in the loop: if key equals “Page” we build a link to the directory and if key equals “Photo” we build an image tag and constrain the height to 150 pixels (just in case the image is too big).
-
-Now this is what you should get:
-
-INSERT PIC
-
-Eh?
 
 #### step z Wrapping it all up
 
