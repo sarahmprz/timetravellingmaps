@@ -9,7 +9,6 @@ We will go through some webtools that each kinda deserve their own tutorial, cos
 
 The following tutorial is a slight mod of a workshop I did month ago, by Mishka Vance at the NYPL, and it has leaned on [this stellar workshop](http://www.nypl.org/blog/2015/01/05/web-maps-primer#fnref:magic) by Mauricio Arteaga (NYPL Labs too). Thanks folks!.
 
-*One map from the archives.*
 
 ##Mapping Historical Vancouver
 
@@ -36,7 +35,7 @@ Below is the link to the map that I have imported into the Map Warper. You can p
 
 and at [Map Warper](http://mapwarper.net/maps/10054)
 
-![warper](/warper.png)
+![warper](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/warper.png)
 
 Do you see the pins in the image above? Each pin is numbered, and is the same in both images. The more pins you add, the more precise your rectification will be, though many pins will also slow the image generator. Youll need at least 3 pins.
 
@@ -60,7 +59,7 @@ I’ve picked some geographical info from the excellent book, [Vancouver Confide
 * The Shõwa Club, hangout for the Black Dragon Society
 * The City Dump/Hobo Jungle, home to 450 of the city’s homeless, in 1931
 
-[Download the CSV list](add githubaddress here)
+[Download the CSV list](https://github.com/sarahmprz/timetravellingmaps/blob/master/vanconfidential.csv)
 
 You can create your own list from other data you find more interesting or useful. It can be people, events, buildings, businesses, whatevs. Good data in = good map out.
 
@@ -80,7 +79,7 @@ Open [GeoJSON.io](GeoJSON.io) in a new browser window. You’ll see the default 
 
 This opens an advanced developer view that let’s you view and modify the code of the page you are viewing (in this case, the map interface). GeoJSON.io includes a programming interface (API) that lets you control the map being displayed. 
 
-![geojson](/geojson.png)
+![geojson](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/geojson.png)
 
 In the Console tab you’ll see some text and, at the bottom, a cursor where you can execute JavaScript code. You’ll see some comments from the creator of GeoJSON.io and a row where you can type new JavaScript commands. Type (copy/paste) the coordinates below in that area and press ENTER.
 
@@ -92,7 +91,7 @@ This will center and zoom us in on Vancouver. Now type this:
 
 …and press ENTER. This will add the tile layer itself. Notice that line of code includes the URL you copied in step 1. The end result will look something like this:
 
-![oldgeojson](/oldgeojson.png)
+![oldgeojson](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/oldgeojson.png)
 
 Well done! Have a breather! You can close the development window but *NOT* the browser window!
 
@@ -103,7 +102,7 @@ Now we will use this modified version of the map as a base to properly geo-locat
 
 You do this by dragging the CSV file from your desktop on to the GeoJSON.io map. Lookatthat!
 
-![csvimport](/csvimport.png)
+![csvimport](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/csvimport.png)
 
 On the right, you’ll see that the data is converted to GeoJSON, and the map zooms in to show the points that represent each Vancouver location. On left you’ll see a little green box telling you that 4 features have been imported.
 
@@ -158,10 +157,7 @@ We need an HTML element where the map will go. Type or copy/paste this in the HT
 	
 With this code we create a div element whose identifier is map and, as you can imagine, it will contain the map. We now need to “style” the element (give it a width and a height and, if you want to, borders and other attributes). Styling is controlled with CSS. Type or copy/paste this in the CSS pane:
 
- #map {
-  width:400px;
-  height:400px;
-}
+<script src="https://gist.github.com/sarahmprz/03cf99f7d1d4d4f94c8a.js"></script>
 	
 This applies a width and a height of 400 pixels to the element whose identifier is `map` (the `#` prefix means "id" in CSS). Of course you can make the rectangle bigger (if your monitor is big enough) and apply other attributes between those `{ }` brackets (e.g.: `background-color: #f00;` for a red background if you want to see the element with no map) but I just wanted to keep it very simple.
 
@@ -179,29 +175,20 @@ http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js
 
 In the left column in JSFiddle find the “External Resources” section. You need to copy those URLs and paste each in the JavaScript/CSS URI box and click the + button. You will see something like this after you do it:
 
-![fiddle](/fiddle.png)
+![fiddle](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/fiddle.png)
 
 This will make JSFiddle load those files the next time you click “Run” and from then on.
 
 #### step c: mo map mo map mo map
 This is the interesting/tricky part - at least for me! We’re gonna write (copy/past is allowed) so we can see our old Vancouver 1937 map:
 
-insert the javascript
+insert the javascript:
 
-// use a variable for the 1937 tile set
-	
-var van_1937 = L.tileLayer( 'http://mapwarper.net/maps/tile/10054/{z}/{x}/{y}.png');
- 
-// create the map with the default the tileset
-
-var map = L.map('map', {layers:van_1937});
- 
-// zoom and center in downtown Vancouver
-map.setView([49.28273, -123.12074],13);
+<script src="https://gist.github.com/sarahmprz/2448832a7dd307b2a147.js"></script>
 
 Now, you should be able to see something like this:
 
-![fiddlewow](/fiddlewow.png)
+![fiddlewow](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/fiddlewow.png)
 
 #### step d: Managing multiple tile sets
 
@@ -213,59 +200,20 @@ You may notice that the map is all white except for the 1937 map and that is wha
 
 This code should *replace your previous JS*:
 
-// 1937 map attribution
-var attribution_1937 = 'Map image from <a href="http://searcharchives.vancouver.ca/">Vancouver Archives</a>';
- 
-// 1937 tile set with attribution
-var van_1937 = L.tileLayer(  'http://mapwarper.net/maps/tile/10054/{z}/{x}/{y}.png' , { attribution: attribution_1937 } );
- 
-// 2015 tile set attribution
-var attribution_2015 = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Imagery © <a href="http://mapbox.com">Mapbox</a>';
- 
-// 2015 tile set using MapBox ID (replace with your own)
-var van_2015 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',{id: 'sarahmprz.ml853h3j',attribution: attribution_2015});
- 
-// create the map with the default the tileset
-var map = L.map('map', {layers:van_1937});
- 
-// create a variable to hold all tile sets and name them so we can use it for the toggler
-var baseMaps = {
-  "Vancouver 2015": van_2015,
-  "Vancouver 1937": van_1937
-};
- 
-// add the tile set switcher control
-L.control.layers(baseMaps).addTo(map);
- 
-// zoom and center in downtown Vancouver
-map.setView([49.28273, -123.12074],13);
+<script src="https://gist.github.com/sarahmprz/f28c387ae0f9be2d2fa9.js"></script>
 
 
 If you look throught this code you will notice it is quite similar to what we had before. The main differences are the addition of attributions and MapBox tile sets (via the map ID). The control itself is two lines: one to create a baseMaps variable that will hold the tile sets (you can add as many tile sets as you want) and another to create the control and add it to the map. Toggle your heart out.
 
 We’re almost there! We now need to display our data. Leaflet makes this process quite easy since it natively supports GeoJSON. The process is just a few lines, but first remove the map zoom function map.setView([49.28273, -123.12074],13). Now paste this code at the bottom of the JS pane:
 
-// the geojson as it comes from the text document
-var geostring = 'paste_geojson_here_keep_quotes';
- 
-// parse the geojson string to a proper json structure
-var geodata = JSON.parse(geostring);
- 
-// now make it understandable by leaflet
-var geolayer = L.geoJson(geodata);
- 
-// add the points to the map
-geolayer.addTo(map);
- 
-// zoom the map to the bounds of the points
-map.fitBounds(geolayer.getBounds());
+<script src="https://gist.github.com/sarahmprz/d819416902b74bc71d53.js"></script>
 
 
 You need to copy the GeoJSON output from the text file (if you cant open your file, change the name to .txt) you downloaded from GeoJSON.io and paste it where you see 'paste_geojson_here_keep_quotes'. Make sure you keep those quotes! That line should end up looking something like:
 
 
-![geojsonfiddle](/geojson.png)
-
+![geojsonfiddle](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/geojsonfiddle.png)
 
 
 We replaced the zoom function with map.fitBounds(geolayer.getBounds()). This makes the map “smarter”: instead of us typing longitude, latitude and zoom level by hand we let Leaflet calculate the bounding area for the set of points provided with getBounds() and pass that as a value to the map’s fitBounds() function. Voilá, the map now zooms to show all the points in the set. If you add more points the bounds will change automatically!
@@ -279,25 +227,17 @@ We want to click on the pins and show a popup box with the data we have associat
 
 Leaflet’s bindPopup() layer function does just that: draws a box with text next to a given layer. This text can be marked up with HTML. Copy/paste this code below all you have so far:
 
-function showPopup(feature, layer) {
-  var key, val;
-  var content = [];
-  for (key in feature.properties) {
-    val = feature.properties[key];
-    content.push("<strong>" + key + ":</strong> " + val);
-  }
-  layer.bindPopup(content.join("<br />"));
-}
+<script src="https://gist.github.com/sarahmprz/f7cd4477947dabc5ebcb.js"></script>
 
 This showPopup() function receives a feature, the piece of GeoJSON that contains all the information (geometry and properties), and a layer, the same GeoJSON as displayed by Leaflet (in our case, the blue pin). These two parameters are passed automatically by the L.geoJson() function. showPopup() then loops through each property in the feature (name, address, etc.) and builds an HTML string. This string is used as the markup for the popup.
 
 We have not connected showPopup to anything. Modify your current L.geoJson line as follows:
 
-var geolayer = L.geoJson(geodata, {onEachFeature: showPopup});
+<script src="https://gist.github.com/sarahmprz/02609cb88bc7d723d441.js"></script>
 
 …you are just adding , {onEachFeature: showPopup} after geodata. This tells Leaflet to apply the showPopup function for each feature in the GeoJSON.
 
-INSERT PIC
+--------INSERT PIC
 
 Sure, this is nice, but wouldn’t it be better to actually see the photo? Let’s do just that! Replace the showPopup function with this one:
 
@@ -329,34 +269,12 @@ Eh?
 
 You will want to compile these three code snippets in an HTML page to publish your new map somewhere. Worry not, below is a code snippet that has the requisite spots for you to paste CSS, HTML and JS. Save all the code as a .html file and publish it somewhere:
 
-
-HTML
-<!DOCTYPE html>
-<html>
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Mapa</title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<link href="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css" media="screen, print" rel="stylesheet">
-<script src="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
-<style type="text/css">
-/* paste CSS below this line */
-
-</style>
-</head>
-<body>
-<!-- paste HTML below this line -->
-
-<script type="text/javascript">
-// paste JavaScript below this line
-
-</script>
-</body>
-</html>
+<script src="https://gist.github.com/sarahmprz/bc5311e2f3240f69e7b2.js"></script>
 
 
 
 ### References:
 * [The New York Public Library’s Space/Time Directory Project](http://spacetime.nypl.org/)
 * [Joey Lee’s super fun webmap tutorial](https://github.com/joeyklee/hellowebmaps/tree/master/Tutorial%20I)
+* [this stellar workshop](http://www.nypl.org/blog/2015/01/05/web-maps-primer#fnref:magic) by Mauricio Arteaga 
+* [Black Strathcona Project](http://blackstrathcona.com/)
