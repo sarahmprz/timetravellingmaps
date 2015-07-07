@@ -34,7 +34,7 @@ and imported into the [Map Warper](http://mapwarper.net/maps/10054)
 
 ![warper](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/warper.png)
 
-Do you see the pins in the image above? Each pin is numbered, and is the same in both images. The more pins you add, the more precise your rectification will be, though many pins will also slow the image generator. Youll need at least 3 pins.
+Do you see the pins in the image above? Each pin is numbered, and is the same in both images. The more pins you add, the more precise your rectification will be, though many pins will also slow the image generator. Youll need at least 3 pins to warp a map for the first time, but you can freely add as many or as few as you like to this one.
 
 You can preview your rectified map in the warper and you can export it. However, the coolest thing about the Warper is that it gives you tiles! The tiles are the URL template that you find under the export tab.
 
