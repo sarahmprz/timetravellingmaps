@@ -69,10 +69,10 @@ GeoJSON uses "features" to describe geographic data, in our case points, but oth
 
 We’re gonna convert our spreadsheet into a GeoJSON object and then update the placeholder latitude and longitude values to the proper values. We will use the map itself to help us figure out those. We’ll need a tool that lets us generate GeoJSON that we can easily manipulate...
 
-Hellooo [GeoJSON.io](geojson.io)! This is “a quick, simple tool for creating, viewing, and sharing maps”. GeoJSON.io has any easy access interface we can use to create the GeoJSON we need.
+Hellooo [geojson.io](geojson.io)! This is “a quick, simple tool for creating, viewing, and sharing maps”. GeoJSON.io has any easy access interface we can use to create the GeoJSON we need.
 
 #####step b: do a little hack
-Open [GeoJSON.io](GeoJSON.io) in a new browser window. You’ll see the default map at full zoom out. Now we need to do a little hacking. Right-click somewhere on the map and select "Inspect Element"
+Open [geojson.io](geojson.io) in a new browser window. You’ll see the default map at full zoom out. Now we need to do a little hacking. Right-click somewhere on the map and select "Inspect Element"
 
 This opens an advanced developer view that let’s you view and modify the code of the page you are viewing (in this case, the map interface). GeoJSON.io includes a programming interface (API) that lets you control the map being displayed. 
 
@@ -112,13 +112,17 @@ We want to be able to compare this old Vancouver map with our present day city s
 
 You can make your own, following the steps below, 
 
-* Go to mapbox.com and log in 
+* Go to mapbox.com and log in/sign up
 * Go to Projects and click New Project
 * Pan the webmap to Vancouver and zoom in to an appropriate level (Ive zoomed to 13). Notice the long, lat and zoom level in the bottom left corner.
 * Play around with the template styles till you find one you like
-* press save, and receive a Map ID, that looks like this:
+* Save your map and receive a Map ID, that looks like this:
 	
-	yourname here.ml853h3j or just use mine: sarahmprz.ml853h3j 
+		yournamehere.ml853h3j 
+		
+		or just use mine: 
+		
+		sarahmprz.ml853h3j 
 
 ###IV FINAL ASSEMBLY
 
@@ -145,7 +149,7 @@ In this example the HTML and CSS parts are very simple. We only need a rectangul
 
 We need an HTML element where the map will go. Type or copy/paste this in the HTML pane:
 	
-	<div id="map"></div>
+<script src="https://gist.github.com/sarahmprz/5a0278be557dd6b0d914.js"></script>
 	
 With this code we create a div element whose identifier is map and, as you can imagine, it will contain the map. We now need to “style” the element (give it a width and a height and, if you want to, borders and other attributes). Styling is controlled with CSS. Type or copy/paste this in the CSS pane:
 
