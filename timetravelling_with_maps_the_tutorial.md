@@ -1,4 +1,6 @@
-#Timetravelling with maps - the tutorial
+#Timetravelling with Maps - the tutorial
+
+###By: Sarah MP
 
 ##Overview:
 Getting to know historical maps are a great way to see how our city has changed and is changing, and to question why these changes happen, and who it affects. Our city’s heritage is deeper and wider than many people realize. Making maps like this allows us to tell a different story of Vancouver.
@@ -10,13 +12,8 @@ We will go through some webtools that each kinda deserve their own tutorial, cos
 The following tutorial is a slight mod of a workshop I did month ago, by Mishka Vance at the NYPL, and it has leaned on [this stellar workshop](http://www.nypl.org/blog/2015/01/05/web-maps-primer#fnref:magic) by Mauricio Arteaga (NYPL Labs too). Thanks folks!.
 
 
-##Mapping Historical Vancouver
+##Let’s Start!
 
-###By: Sarah MP
-
-
-
-##GETTING STARTED
 
 
 ###I GEO-RECTIFICATION
