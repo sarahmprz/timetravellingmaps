@@ -30,7 +30,7 @@ Below is the link to the map that I have imported into the Map Warper. You can p
 
 [Vancouver 1937](http://searcharchives.vancouver.ca/index.php/map-of-city-of-vancouver-british-columbia-9)
 
-and at [Map Warper](http://mapwarper.net/maps/10054)
+and imported into the [Map Warper](http://mapwarper.net/maps/10054)
 
 ![warper](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/warper.png)
 
@@ -49,7 +49,7 @@ Okay, we’ve got the map - what are we gonna put into it?
 
 We could of course go back into the Vancouver Archives and dig up something really interesting amongst the dusty pages, but luckily, a team of pretty stellar scholars have done that for us already!
 
-I’ve picked some geographical info from the excellent book, [Vancouver Confidential](http://www.anvilpress.com/Books/vancouver-confidential). Locations mentioned in this book are compiled in a comma-separated value (csv) file. The four locations we will be adding to our map, are 
+I’ve picked some geographical info from the excellent book, [Vancouver Confidential](http://www.anvilpress.com/Books/vancouver-confidential). Locations mentioned in this book are compiled in a comma-separated value (csv) file. The four no-longer-existing locations we will be adding to our map, are 
 
 * Sandy’s Billiard, a local hang spot for "Red agitators"
 * The Palomar, legendary nightclub and theatre
@@ -58,7 +58,7 @@ I’ve picked some geographical info from the excellent book, [Vancouver Confide
 
 [Download the CSV list](https://raw.githubusercontent.com/sarahmprz/timetravellingmaps/master/vanconfidential.csv)
 
-You can create your own list from other data you find more interesting or useful. It can be people, events, buildings, businesses, whatevs. Good data in = good map out.
+You can also create your own list from other data you find more interesting or useful. It can be people, events, buildings, businesses, whatevs. Good data in = good map out.
 
 Make sure to include latitude and longitude columns and save it as a csv.
 
@@ -71,7 +71,7 @@ We’re gonna convert our spreadsheet into a GeoJSON object and then update the 
 
 Hellooo [GeoJSON.io](geojson.io)! This is “a quick, simple tool for creating, viewing, and sharing maps”. GeoJSON.io has any easy access interface we can use to create the GeoJSON we need.
 
-#####step b do a little hack
+#####step b: do a little hack
 Open [GeoJSON.io](GeoJSON.io) in a new browser window. You’ll see the default map at full zoom out. Now we need to do a little hacking. Right-click somewhere on the map and select "Inspect Element"
 
 This opens an advanced developer view that let’s you view and modify the code of the page you are viewing (in this case, the map interface). GeoJSON.io includes a programming interface (API) that lets you control the map being displayed. 
@@ -86,7 +86,7 @@ This will center and zoom us in on Vancouver. Now type this:
 
 	window.api.map.addLayer( L.tileLayer( 'http://mapwarper.net/maps/tile/10054/{z}/{x}/{y}.png' ) );
 
-…and press ENTER. This will add the tile layer itself. Notice that line of code includes the URL you copied in step 1. The end result will look something like this:
+…and press ENTER. This will add the tile layer itself. Notice that line of code includes the URL that the Map Warper generated for us in step 1. The end result will look something like this:
 
 ![oldgeojson](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/oldgeojson.png)
 
@@ -112,18 +112,13 @@ We want to be able to compare this old Vancouver map with our present day city s
 
 You can make your own, following the steps below, 
 
-* 
-* 
-* 
-* 
-
-
-
-
-
-or, take a shortcut and use mine: 
+* Go to mapbox.com and log in 
+* Go to Projects and click New Project
+* Pan the webmap to Vancouver and zoom in to an appropriate level (Ive zoomed to 13). Notice the long, lat and zoom level in the bottom left corner.
+* Play around with the template styles till you find one you like
+* press save, and receive a Map ID, that looks like this:
 	
-	sarahmprz.ml853h3j 
+	yourname here.ml853h3j or just use mine: sarahmprz.ml853h3j 
 
 ###IV FINAL ASSEMBLY
 
