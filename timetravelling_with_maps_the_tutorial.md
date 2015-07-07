@@ -202,13 +202,11 @@ This code should *replace your previous JS*:
 
 <script src="https://gist.github.com/sarahmprz/f28c387ae0f9be2d2fa9.js"></script>
 
-
 If you look throught this code you will notice it is quite similar to what we had before. The main differences are the addition of attributions and MapBox tile sets (via the map ID). The control itself is two lines: one to create a baseMaps variable that will hold the tile sets (you can add as many tile sets as you want) and another to create the control and add it to the map. Toggle your heart out.
 
 We’re almost there! We now need to display our data. Leaflet makes this process quite easy since it natively supports GeoJSON. The process is just a few lines, but first remove the map zoom function map.setView([49.28273, -123.12074],13). Now paste this code at the bottom of the JS pane:
 
 <script src="https://gist.github.com/sarahmprz/d819416902b74bc71d53.js"></script>
-
 
 You need to copy the GeoJSON output from the text file (if you cant open your file, change the name to .txt) you downloaded from GeoJSON.io and paste it where you see 'paste_geojson_here_keep_quotes'. Make sure you keep those quotes! That line should end up looking something like:
 
