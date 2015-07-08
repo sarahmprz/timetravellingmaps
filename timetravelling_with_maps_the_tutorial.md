@@ -170,10 +170,10 @@ If you click "Run" now you won't see much (unless you added a background color o
 To present the map and make it interactive we will need some external assets and JavaScript. We are going to need both something called [Leaflet](http://leafletjs.com/) and [Mapbox JS](https://www.mapbox.com/mapbox.js/api/v2.2.1/) in order to present and control the map. Leaflet is included in MapBoxJS so we just need to worry about the latter. MapBoxJS is composed of two separate files: a JS file and a CSS file. You already have an idea of what the CSS file does. The JavaScript file contains all the interactive mapping magic. These are the URLs to the files in question (note that it is not the latest MapBoxJS version but no worries, it will work):
 
 CSS file:
-http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css
+http://api.tiles.mapbox.com/mapbox.js/v2.1.5./mapbox.css
 
 JavaScript file:
-http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js
+http://api.tiles.mapbox.com/mapbox.js/v2.1.5./mapbox.js
 
 In the left column in JSFiddle find the “External Resources” section. You need to copy those URLs and paste each in the JavaScript/CSS URI box and click the + button. You will see something like this after you do it:
 
