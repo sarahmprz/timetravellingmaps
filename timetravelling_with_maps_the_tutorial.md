@@ -329,6 +329,10 @@ You will want to compile these three code snippets in an HTML page to publish yo
 	</script>
 	</body>
 	</html>
+	
+
+### Working js fiddle link including generic point loading function
+[working js fiddle](https://jsfiddle.net/joeyklee/jrfjf8va/)
 
 
 ### References:
