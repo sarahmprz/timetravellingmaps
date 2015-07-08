@@ -113,7 +113,7 @@ We have not connected showPopup to anything. Modify your current L.geoJson line 
 
 You will want to compile these three code snippets in an HTML page to publish your new map somewhere. Worry not, below is a code snippet that has the requisite spots for you to paste CSS, HTML and JS. Save all the code as a .html file and publish it somewhere:
 
-’’’HTML
+HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +136,7 @@ You will want to compile these three code snippets in an HTML page to publish yo
  
 </script>
 </body>
-</html>’’’
+</html>
 
 <script src="https://gist.github.com/sarahmprz/bc5311e2f3240f69e7b2.js"></script>
 

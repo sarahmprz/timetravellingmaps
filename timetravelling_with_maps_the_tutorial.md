@@ -147,13 +147,19 @@ JSFiddle takes care of assembling the three code components into the result ever
 
 In this example the HTML and CSS parts are very simple. We only need a rectangular area in the page that will display the map and all its controls.
 
-We need an HTML element where the map will go. Type or copy/paste this in the HTML pane:
-	
+We need an HTML element where the map will go. Type or copy/paste this in the HTML pane: 
+
 <script src="https://gist.github.com/sarahmprz/5a0278be557dd6b0d914.js"></script>
-	
+	<div id="map"></div> 
+
+
 With this code we create a div element whose identifier is map and, as you can imagine, it will contain the map. We now need to “style” the element (give it a width and a height and, if you want to, borders and other attributes). Styling is controlled with CSS. Type or copy/paste this in the CSS pane:
 
 <script src="https://gist.github.com/sarahmprz/03cf99f7d1d4d4f94c8a.js"></script>
+	#map {  
+	width:400px;  
+	height:400px;
+	}
 	
 This applies a width and a height of 400 pixels to the element whose identifier is `map` (the `#` prefix means "id" in CSS). Of course you can make the rectangle bigger (if your monitor is big enough) and apply other attributes between those `{ }` brackets (e.g.: `background-color: #f00;` for a red background if you want to see the element with no map) but I just wanted to keep it very simple.
 
@@ -182,6 +188,15 @@ insert the javascript:
 
 <script src="https://gist.github.com/sarahmprz/2448832a7dd307b2a147.js"></script>
 
+	// use a variable for the 1937 tile set
+	var van_1937 = L.tileLayer( 'http://mapwarper.net/maps/	tile/10054/{z}/{x}/{y}.png');
+ 
+	// create the map with the default the tileset
+	var map = L.map('map', {layers:van_1937});
+ 
+	// zoom and center in downtown Vancouver
+	map.setView([49.28273, -123.12074],13);
+
 Now, you should be able to see something like this:
 
 ![fiddlewow](https://github.com/sarahmprz/timetravellingmaps/blob/master/img/fiddlewow.png)
@@ -198,11 +213,51 @@ This code should *replace your previous JS*:
 
 <script src="https://gist.github.com/sarahmprz/f28c387ae0f9be2d2fa9.js"></script>
 
+	// 1937 map attribution
+	var attribution_1937 = 'Map image from <a href="http://searcharchives.vancouver.ca/">Vancouver Archives</a>';
+ 
+	// 1937 tile set with attribution
+	var van_1937 = L.tileLayer(  'http://mapwarper.net/maps/tile/10054/{z}/{x}/{y}.png' , { attribution: attribution_1937 } );
+ 
+	// 2015 tile set attribution
+	var attribution_2015 = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Imagery © <a href="http://mapbox.com">Mapbox</a>';
+ 
+	// 2015 tile set using MapBox ID (replace with your own)
+	var van_2015 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',{id: 'sarahmprz.ml853h3j',attribution: attribution_2015});
+ 
+	// create the map with the default the tileset
+	var map = L.map('map', {layers:van_1937});
+ 
+	// create a variable to hold all tile sets and name them so we can use it for the toggler
+	var baseMaps = {"Vancouver 2015": van_2015,  "Vancouver 1937": van_1937
+	};
+ 
+	// add the tile set switcher control
+	L.control.layers(baseMaps).addTo(map);
+ 
+	// zoom and center in downtown Vancouver
+	map.setView([49.28273, -123.12074],13);
+
 If you look throught this code you will notice it is quite similar to what we had before. The main differences are the addition of attributions and MapBox tile sets (via the map ID). The control itself is two lines: one to create a baseMaps variable that will hold the tile sets (you can add as many tile sets as you want) and another to create the control and add it to the map. Toggle your heart out.
 
 We’re almost there! We now need to display our data. Leaflet makes this process quite easy since it natively supports GeoJSON. The process is just a few lines, but first remove the map zoom function map.setView([49.28273, -123.12074],13). Now paste this code at the bottom of the JS pane:
 
 <script src="https://gist.github.com/sarahmprz/d819416902b74bc71d53.js"></script>
+
+	// the geojson as it comes from the text document
+	var geostring = 'paste_geojson_here_keep_quotes';
+ 
+	// parse the geojson string to a proper json structure
+	var geodata = JSON.parse(geostring);
+ 
+	// now make it understandable by leaflet
+	var geolayer = L.geoJson(geodata);
+ 
+	// add the points to the map
+	geolayer.addTo(map);
+ 
+	// zoom the map to the bounds of the points
+	map.fitBounds(geolayer.getBounds());
 
 You need to copy the GeoJSON output from the text file (if you cant open your file, change the name to .txt) you downloaded from GeoJSON.io and paste it where you see 'paste_geojson_here_keep_quotes'. Make sure you keep those quotes! That line should end up looking something like:
 
@@ -223,11 +278,23 @@ Leaflet’s bindPopup() layer function does just that: draws a box with text nex
 
 <script src="https://gist.github.com/sarahmprz/f7cd4477947dabc5ebcb.js"></script>
 
+	function showPopup(feature, layer) {
+	var key, val;
+	var content = [];
+	  for (key in feature.properties) {
+    val = feature.properties[key];
+    content.push("<strong>" + key + ":</strong> " + val);
+    }
+    layer.bindPopup(content.join("<br />"));
+    }
+
 This showPopup() function receives a feature, the piece of GeoJSON that contains all the information (geometry and properties), and a layer, the same GeoJSON as displayed by Leaflet (in our case, the blue pin). These two parameters are passed automatically by the L.geoJson() function. showPopup() then loops through each property in the feature (name, address, etc.) and builds an HTML string. This string is used as the markup for the popup.
 
 We have not connected showPopup to anything. Modify your current L.geoJson line as follows:
 
 <script src="https://gist.github.com/sarahmprz/02609cb88bc7d723d441.js"></script>
+
+	var geolayer = L.geoJson(geodata, {onEachFeature: showPopup});
 
 …you are just adding , {onEachFeature: showPopup} after geodata. This tells Leaflet to apply the showPopup function for each feature in the GeoJSON.
 
@@ -237,6 +304,31 @@ You will want to compile these three code snippets in an HTML page to publish yo
 
 <script src="https://gist.github.com/sarahmprz/bc5311e2f3240f69e7b2.js"></script>
 
+
+	HTML
+	<!DOCTYPE html>
+	<html>
+	<head>
+ 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Confidential Vancouver</title>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<link href="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css" media="screen, print" rel="stylesheet">
+	<script src="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
+	<style type="text/css">
+	/* paste CSS below this line */
+ 
+	</style>
+	</head>
+	<body>
+	<!-- paste HTML below this line -->
+ 
+	<script type="text/javascript">
+	// paste JavaScript below this line
+ 
+	</script>
+	</body>
+	</html>
 
 
 ### References:
