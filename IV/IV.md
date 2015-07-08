@@ -113,6 +113,31 @@ We have not connected showPopup to anything. Modify your current L.geoJson line 
 
 You will want to compile these three code snippets in an HTML page to publish your new map somewhere. Worry not, below is a code snippet that has the requisite spots for you to paste CSS, HTML and JS. Save all the code as a .html file and publish it somewhere:
 
+’’’HTML
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Confidential Vancouver</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css" media="screen, print" rel="stylesheet">
+<script src="http://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
+<style type="text/css">
+/* paste CSS below this line */
+ 
+</style>
+</head>
+<body>
+<!-- paste HTML below this line -->
+ 
+<script type="text/javascript">
+// paste JavaScript below this line
+ 
+</script>
+</body>
+</html>’’’
+
 <script src="https://gist.github.com/sarahmprz/bc5311e2f3240f69e7b2.js"></script>
 
 
