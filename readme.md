@@ -16,7 +16,7 @@ We will
 
 aaaand if we have time, we will
 
-* integrate all assets in an interactive (github) web page
+* integrate all assets, ready for you to post on your webpage
 
 tl;dr
 
