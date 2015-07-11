@@ -4,7 +4,7 @@ With: Sarah MP
 
 #Setup:
 * sign up for mapwarper.net
-* bring your laptop, or borrow one!
+* bring your laptop, or borrow one (or just peek (consensually) over someone’s shoulder)!
 * load your patience_and_enthusiasm file
 
 #What we’re gonna do:
