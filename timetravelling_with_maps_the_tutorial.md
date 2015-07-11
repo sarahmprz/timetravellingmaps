@@ -189,7 +189,7 @@ insert the javascript:
 <script src="https://gist.github.com/sarahmprz/2448832a7dd307b2a147.js"></script>
 
 	// use a variable for the 1937 tile set
-	var van_1937 = L.tileLayer( 'http://mapwarper.net/maps/	tile/10054/{z}/{x}/{y}.png');
+	var van_1937 = L.tileLayer( 'http://mapwarper.net/maps/tile/10054/{z}/{x}/{y}.png');
  
 	// create the map with the default the tileset
 	var map = L.map('map', {layers:van_1937});
